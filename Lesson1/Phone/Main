@@ -1,0 +1,27 @@
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Phone number1 = new Phone();
+		number1.setNumber(123456789);
+		Phone number2 = new Phone();
+		number2.setNumber(123453789);
+		number2.setModel("Nokia");
+		Phone number3 = new Phone(13456789, "Nokia", "Mike");
+		
+		Phone number4 = new Phone();
+		number4.setNumber(123356789);
+		Phone number5 = new Phone();
+		number5.setNumber(123434789);
+		Network nt = new Network("Life");
+		nt.registerPhoneInNetwork(number1);
+		nt.registerPhoneInNetwork(number2);
+		nt.registerPhoneInNetwork(number3);
+		nt.registerPhoneInNetwork(number4);
+		nt.registerPhoneInNetwork(number5);
+		
+		number1.call(123456789, nt);
+		number1.call(number3, nt);
+	}
+
+}

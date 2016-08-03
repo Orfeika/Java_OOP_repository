@@ -1,0 +1,74 @@
+public class Phone {
+	private int number;
+	private String model;
+	private String customerName;
+
+	public Phone(int number, String model, String customerName) {
+		super();
+		this.number = number;
+		this.model = model;
+		this.customerName = customerName;
+	}
+
+	public Phone() {
+		super();
+	}
+
+	public int getNumber() {
+		return number;
+	}
+
+	public void setNumber(int number) {
+		this.number = number;
+	}
+
+	public String getModel() {
+		return model;
+	}
+
+	public void setModel(String model) {
+		this.model = model;
+	}
+
+	public String getCustomerName() {
+		return customerName;
+	}
+
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+
+	public void registerNumberInNetwork(Phone phone, Network NetworkName) {
+		NetworkName.registerPhoneInNetwork(phone);
+	}
+
+	private boolean checkNumberInNetwork(int number, Network networkName) {
+		int[] numbersList = networkName.getNumbersList();
+		for (int i = 0; i < numbersList.length; i++) {
+			if (number == numbersList[i]) {
+				return true;
+			}
+		}
+
+		return false;
+
+	}
+
+	public void call(int number, Network NetworkName) {
+		if (checkNumberInNetwork(number, NetworkName) == true) {
+			System.out.println("Calling to " + number);
+		} else {
+			System.out.println("Wrong number");
+		}
+	}
+
+	public void call(Phone phone, Network NetworkName) {
+		if (checkNumberInNetwork(phone.getNumber(), NetworkName) == true) {
+			System.out.println("From mobile phone " + phone.getModel() + " we are colling to " + phone.getCustomerName()
+					+ "'s number " + phone.getNumber());
+		} else {
+			System.out.println("Wrong number");
+		}
+	}
+
+}

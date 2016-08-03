@@ -1,74 +1,77 @@
-public class Phone {
+
+public class Network {
+
+	private String networkName;
+	private int[] numbersList = new int[5];
 	private int number;
-	private String model;
-	private String customerName;
 
-	public Phone(int number, String model, String customerName) {
+	public Network(String networkName, int number) {
 		super();
-		this.number = number;
-		this.model = model;
-		this.customerName = customerName;
-	}
-
-	public Phone() {
-		super();
-	}
-
-	public int getNumber() {
-		return number;
-	}
-
-	public void setNumber(int number) {
+		this.networkName = networkName;
 		this.number = number;
 	}
 
-	public String getModel() {
-		return model;
+	public Network(String networkName) {
+		super();
+		this.networkName = networkName;
 	}
 
-	public void setModel(String model) {
-		this.model = model;
+	public Network() {
+		super();
 	}
 
-	public String getCustomerName() {
-		return customerName;
+	public Network(Phone phone) {
+		this.number = phone.getNumber();
 	}
 
-	public void setCustomerName(String customerName) {
-		this.customerName = customerName;
+	public int[] getNumbersList() {
+		return numbersList;
 	}
 
-	public void registerNumberInNetwork(Phone phone, Network NetworkName) {
-		NetworkName.registerPhoneInNetwork(phone);
+	public String getNetworkName() {
+		return networkName;
 	}
 
-	private boolean checkNumberInNetwork(int number, Network networkName) {
-		int[] numbersList = networkName.getNumbersList();
+	public void setNetworkName(String networkName) {
+		this.networkName = networkName;
+	}
+
+	public int setNumberToAvailablePlace() {
+		for (int i = 0; i < numbersList.length; i++) {
+			if (numbersList[i] == 0) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	public void registerPhoneInNetwork(Phone phone) {
+		if (CheckNumberAlreadyExists(phone.getNumber()) == false) {
+			if (!(setNumberToAvailablePlace() == -1)) {
+				numbersList[setNumberToAvailablePlace()] = phone.getNumber();
+				// System.out.println(Arrays.toString(numbersList));
+
+			}
+			else{
+				System.out.println("There is no avaliable place for your number");
+	
+			}
+			
+		}
+
+	}
+
+	private boolean CheckNumberAlreadyExists(int number) {
+
 		for (int i = 0; i < numbersList.length; i++) {
 			if (number == numbersList[i]) {
+				System.out.println("Error!This phone number already exists in " + networkName + " network");
 				return true;
 			}
 		}
 
 		return false;
 
-	}
-
-	public void call(int number, Network NetworkName) {
-		if (checkNumberInNetwork(number, NetworkName) == true) {
-			System.out.println("Calling to " + number);
-		} else {
-			System.out.println("Wrong number");
-		}
-	}
-
-	public void call(Phone phone, Network NetworkName) {
-		if (checkNumberInNetwork(phone.getNumber(), NetworkName) == true) {
-			System.out.println("From mobile phone " + phone.getModel() + " we are colling to " + phone.getCustomerName()
-					+ "'s number " + phone.getNumber());
-		} else {
-			System.out.println("Wrong number");
-		}
 	}
 
 }

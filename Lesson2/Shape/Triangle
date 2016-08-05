@@ -1,0 +1,33 @@
+
+public class Triangle extends Shape{
+	private Point a;
+	private Point b;
+	private Point c;
+	@Override
+	double getPerimetr( ) {
+		double perimetr = (determineTriangle() == true)? 
+				calculateLineLength(a, b)+ calculateLineLength(b,c)+calculateLineLength(c, a):-1;
+		return perimetr;
+		}
+
+	@Override
+	double getArea() {
+		double p = getPerimetr();
+		double area =(determineTriangle() == true)?
+				Math.sqrt(p * (p - calculateLineLength(a, b)) * (p - calculateLineLength(b,c)) 
+						* (p - calculateLineLength(c, a))):-1;
+		return area;
+	}
+
+	private Boolean determineTriangle() {
+		double ab = calculateLineLength(a, b);
+		double bc = calculateLineLength(b,c);
+		double ca = calculateLineLength(c, a);
+		
+		return ((ab + bc) > ca && (ab + ca) > bc && (bc + ca) > ab);
+
+	}
+	
+	
+	
+}

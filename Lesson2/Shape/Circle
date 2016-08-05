@@ -1,0 +1,47 @@
+
+public class Circle extends Shape {
+		private double radius; 
+		private Point center; 
+		
+		public Circle() {
+			super();
+		}
+
+		public Circle(double radius, Point center) {
+			super();
+			this.radius = radius;
+			this.center = center;
+		}	
+		public Circle(double radius) {
+			this.radius = radius;
+		}	
+		
+		
+	public double getRadius() {
+			return radius;
+		}
+
+		public void setRadius(double radius) {
+			this.radius = radius;
+		}
+
+		public Point getCenter() {
+			return center;
+		}
+
+		public void setCenter(Point center) {
+			this.center = center;
+		}
+
+	@Override
+	public double getPerimetr() {
+			return Math.PI*2*radius;
+	}
+
+
+	@Override
+	double getArea() {
+		return Math.PI*Math.pow(radius, 2);
+	}
+
+}

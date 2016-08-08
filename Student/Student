@@ -1,0 +1,28 @@
+
+public class Student extends  Human {
+	private String mainFieldOfStudy;
+	private String university; 
+	private String className;
+	
+	public Student(int age, String firstName, String secondName,String sex, int yearOfBirth, String positiveQualities,
+			String mainFieldOfStudy, String university) {
+		super(age, firstName, secondName,sex, yearOfBirth, positiveQualities);
+		this.mainFieldOfStudy = mainFieldOfStudy;
+		this.university = university;
+		
+	}
+		
+	public Student() {
+		
+	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return  "I am " + className + ". "+ super.toString() + " I study in " + university + ", my main field of study is"
+				+mainFieldOfStudy;
+	} 
+	
+	
+
+}

@@ -1,0 +1,75 @@
+
+public class Human {
+	private int age;
+	private String firstName;
+	private String secondName;
+	private int yearOfBirth;
+	private String positiveQualities;
+	private String sex;  
+	
+
+	public Human(int age, String firstName, String secondName,String sex,  int yearOfBirth, String positiveQualities) {
+
+		this.age = age;
+		this.firstName = firstName;
+		this.secondName = secondName;
+		this.sex = sex; 
+		this.yearOfBirth = yearOfBirth;
+		this.positiveQualities = positiveQualities;
+	}
+
+	public Human() {
+
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getSecondName() {
+		return secondName;
+	}
+
+	public void setSecondName(String secondName) {
+		this.secondName = secondName;
+	}
+
+	public int getYearOfBirth() {
+		return yearOfBirth;
+	}
+
+	public void setYearOfBirth(int yearOfBirth) {
+		this.yearOfBirth = yearOfBirth;
+	}
+
+	public String getPositiveQualities() {
+		return positiveQualities;
+	}
+
+	public void setPositiveQualities(String positiveQualities) {
+		this.positiveQualities = positiveQualities;
+	}
+
+	@Override
+	public String toString() {
+	
+		return " My name is " + firstName + " "+ secondName+
+				" my age is " + age  + "I am " + 
+				+ yearOfBirth + "year of birth. " + "My positive quality is " + positiveQualities + ".";
+	}
+
+	
+	
+}

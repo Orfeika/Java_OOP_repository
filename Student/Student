@@ -1,4 +1,5 @@
 
+
 public class Student extends  Human {
 	private String mainFieldOfStudy;
 	private String university; 
@@ -16,11 +17,11 @@ public class Student extends  Human {
 		
 	}
 
-	@Override
-	public String toString() {
+
+	public void printInfo() {
 		// TODO Auto-generated method stub
-		return  "I am " + className + ". "+ super.toString() + " I study in " + university + ", my main field of study is"
-				+mainFieldOfStudy;
+		System.out.println("I am " + className + ". "+ super.toString() + " I study in " + university + ", my main field of study is"
+				+mainFieldOfStudy);
 	} 
 	
 	

@@ -1,4 +1,3 @@
-
 public class Human {
 	private int age;
 	private String firstName;
@@ -62,12 +61,12 @@ public class Human {
 		this.positiveQualities = positiveQualities;
 	}
 
-	@Override
-	public String toString() {
+
+	public void printInfo() {
 	
-		return " My name is " + firstName + " "+ secondName+
+		System.out.println(" My name is " + firstName + " "+ secondName+
 				" my age is " + age  + "I am " + 
-				+ yearOfBirth + "year of birth. " + "My positive quality is " + positiveQualities + ".";
+				+ yearOfBirth + "year of birth. " + "My positive quality is " + positiveQualities + "."); 
 	}
 
 	

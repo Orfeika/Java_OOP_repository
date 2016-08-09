@@ -1,0 +1,10 @@
+
+public class ExceptionGroupSize  extends Exception{
+
+	@Override
+	public String getMessage() {
+		return "The group size is 10 persons.We could not add the eleventh student.  Please, do something with him. ";
+	}
+	
+
+}

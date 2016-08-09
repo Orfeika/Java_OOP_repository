@@ -1,0 +1,21 @@
+
+public class Group {
+	private Student studentsGroup[]=new Student[10];
+	
+	
+	public void addStudenTtoGroup(Student student){
+		
+	}
+	
+	public boolean validateGroupSize(){
+		Student st = new Student();
+		for (int i =0; i<studentsGroup.length;i++){
+			if (studentsGroup[i].equals(st)){
+				return true;
+			}
+		}
+		return false;
+	}
+		
+
+}

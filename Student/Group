@@ -1,21 +1,25 @@
 
 public class Group {
-	private Student studentsGroup[]=new Student[10];
-	
-	
-	public void addStudenTtoGroup(Student student){
-		
+	private Student studentsGroup[] = new Student[10];
+
+	public void addStudenTtoGroup(Student student) throws ExceptionGroupSize {
+
+		if (validateGroupSize() == -1) {
+			throw new ExceptionGroupSize();
+		} else {
+			studentsGroup[validateGroupSize()] = student;
+		}
+
 	}
-	
-	public boolean validateGroupSize(){
+
+	public int validateGroupSize() {
 		Student st = new Student();
-		for (int i =0; i<studentsGroup.length;i++){
-			if (studentsGroup[i].equals(st)){
-				return true;
+		for (int i = 0; i < studentsGroup.length; i++) {
+			if (studentsGroup[i].equals(st)) {
+				return i;
 			}
 		}
-		return false;
+		return -1;
 	}
-		
 
 }

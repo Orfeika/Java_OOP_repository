@@ -1,27 +1,48 @@
 
+import java.util.Date;
 
 public class Student extends  Human {
 	private String mainFieldOfStudy;
 	private String university; 
-	private String className;
-	
-	public Student(int age, String firstName, String secondName,String sex, int yearOfBirth, String positiveQualities,
-			String mainFieldOfStudy, String university) {
-		super(age, firstName, secondName,sex, yearOfBirth, positiveQualities);
-		this.mainFieldOfStudy = mainFieldOfStudy;
-		this.university = university;
+
+
 		
+	public Student(String firstName, String secondName, String sex, int yearOfBirth, Date dateOfBirth) {
+		super(firstName, secondName, sex, yearOfBirth, dateOfBirth);
+		// TODO Auto-generated constructor stub
 	}
-		
+	public Student(String firstName, String secondName, String sex, int yearOfBirth, Date dateOfBirth, String mainFieldOfStudy, String university) {
+		super(firstName, secondName, sex, yearOfBirth, dateOfBirth);
+		this.mainFieldOfStudy=mainFieldOfStudy;
+		this.university=university;
+		// TODO Auto-generated constructor stub
+	}
+
 	public Student() {
 		
 	}
 
 
+	public String getMainFieldOfStudy() {
+		return mainFieldOfStudy;
+	}
+
+	public void setMainFieldOfStudy(String mainFieldOfStudy) {
+		this.mainFieldOfStudy = mainFieldOfStudy;
+	}
+
+	public String getUniversity() {
+		return university;
+	}
+
+	public void setUniversity(String university) {
+		this.university = university;
+	}
+
 	public void printInfo() {
 		// TODO Auto-generated method stub
-		System.out.println("I am " + className + ". "+ super.toString() + " I study in " + university + ", my main field of study is"
-				+mainFieldOfStudy);
+		System.out.println( super.toString() + " I study in " + university + ", my main field of study is"
+				+ mainFieldOfStudy);
 	} 
 	
 	

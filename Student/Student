@@ -1,50 +1,47 @@
 
-import java.util.Date;
+public class Group {
+	private Student studentsGroup[] = new Student[10];
+	private int  counter = 0; 
 
-public class Student extends  Human {
-	private String mainFieldOfStudy;
-	private String university; 
-
-
+	public void addStudenTtoGroup(Student student) throws ExceptionGroupSize {
+		if (counter>studentsGroup.length){
+			throw new ExceptionGroupSize();
+		}
+		 else {
+				studentsGroup[counter] = student;
+				counter++;
+			}
 		
-	public Student(String firstName, String secondName, String sex, int yearOfBirth, Date dateOfBirth) {
-		super(firstName, secondName, sex, yearOfBirth, dateOfBirth);
-		// TODO Auto-generated constructor stub
-	}
-	public Student(String firstName, String secondName, String sex, int yearOfBirth, Date dateOfBirth, String mainFieldOfStudy, String university) {
-		super(firstName, secondName, sex, yearOfBirth, dateOfBirth);
-		this.mainFieldOfStudy=mainFieldOfStudy;
-		this.university=university;
-		// TODO Auto-generated constructor stub
-	}
 
-	public Student() {
+	}
+	
+	public int searchStudent(Student student){
+		for (int i =0; i<studentsGroup.length; i++){
+			if(studentsGroup[i].getSecondName().equals(student.getSecondName())){
+				return i;
+			}
+		
+		}
+					return -1;
+		
+		
+	}
+	
+	public void removeStudentFromGroup(Student student){
+		if (!(searchStudent(student)==-1)){
+		for (int i = searchStudent(student); i < studentsGroup.length-1; i++) {
+			studentsGroup[i]=studentsGroup[i+1];	
+		}
+		studentsGroup[studentsGroup.length]=null;
+		counter--; 
+		}
+		else{
+			System.out.println("Group is empty");
+		}
+			
 		
 	}
 
-
-	public String getMainFieldOfStudy() {
-		return mainFieldOfStudy;
-	}
-
-	public void setMainFieldOfStudy(String mainFieldOfStudy) {
-		this.mainFieldOfStudy = mainFieldOfStudy;
-	}
-
-	public String getUniversity() {
-		return university;
-	}
-
-	public void setUniversity(String university) {
-		this.university = university;
-	}
-
-	public void printInfo() {
-		// TODO Auto-generated method stub
-		System.out.println( super.toString() + " I study in " + university + ", my main field of study is"
-				+ mainFieldOfStudy);
-	} 
-	
-	
 
 }
+

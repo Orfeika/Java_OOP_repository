@@ -1,47 +1,66 @@
+import java.util.Comparator;
 
-public class Group {
-	private Student studentsGroup[] = new Student[10];
-	private int  counter = 0; 
 
-	public void addStudenTtoGroup(Student student) throws ExceptionGroupSize {
-		if (counter>studentsGroup.length){
-			throw new ExceptionGroupSize();
-		}
-		 else {
-				studentsGroup[counter] = student;
-				counter++;
-			}
+public class Student extends  Human implements Comparable<Student> {
+	private String mainFieldOfStudy;
+	private String university; 
+
+	public Student(String firstName, String secondName, String sex, String stringDateOfBirth, String mainFieldOfStudy,
+			String university) {
+		super(firstName, secondName, sex, stringDateOfBirth);
+		this.mainFieldOfStudy = mainFieldOfStudy;
+		this.university = university;
+	}
+
+	public Student() {
 		
+	}
 
+	public String getMainFieldOfStudy() {
+		return mainFieldOfStudy;
+	}
+
+	public void setMainFieldOfStudy(String mainFieldOfStudy) {
+		this.mainFieldOfStudy = mainFieldOfStudy;
+	}
+
+	public String getUniversity() {
+		return university;
+	}
+
+	public void setUniversity(String university) {
+		this.university = university;
 	}
 	
-	public int searchStudent(Student student){
-		for (int i =0; i<studentsGroup.length; i++){
-			if(studentsGroup[i].getSecondName().equals(student.getSecondName())){
-				return i;
-			}
-		
-		}
-					return -1;
-		
-		
-	}
-	
-	public void removeStudentFromGroup(Student student){
-		if (!(searchStudent(student)==-1)){
-		for (int i = searchStudent(student); i < studentsGroup.length-1; i++) {
-			studentsGroup[i]=studentsGroup[i+1];	
-		}
-		studentsGroup[studentsGroup.length]=null;
-		counter--; 
-		}
-		else{
-			System.out.println("Group is empty");
-		}
-			
-		
+
+	public void printInfo() {
+		// TODO Auto-generated method stub
+		System.out.println( super.toString() + " I study in " + university + ", my main field of study is"
+				+ mainFieldOfStudy);
 	}
 
+
+	public static Comparator<Student> StudentNameComparator = new Comparator<Student>() {
+		public int compare(Student st1, Student st2) {
+			String st1Name = st1.getSecondName().toUpperCase();
+			String st2Name = st2.getSecondName().toUpperCase();
+					
+			return st1Name.compareToIgnoreCase(st2Name);
+		}
+	};
+
+	@Override
+	public int compareTo(Student othetStudent) {
+
+		return (this.getSecondName().compareToIgnoreCase(othetStudent.getSecondName()));
+	}
+
+
+	@Override
+	public String toString() {
+		return super.toString()+" main field of study" + mainFieldOfStudy + ", university=" + university ;
+	} 
+	
+	
 
 }
-

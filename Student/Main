@@ -1,0 +1,24 @@
+
+public class Main {
+
+	public static void main(String[] args) {
+	Student st1 = new Student("Mike","Pet","Male", "10.10.1990", "History", "KPI");
+	Student st2 = new Student("Nike","APet","Female", "10.10.1991", "Math", "NAU");
+	Group gr = new Group();
+	try {
+		gr.addStudenTtoGroup(st1);
+		System.out.println(gr.toString());
+		gr.addStudenTtoGroup(st2);
+		System.out.println(gr.toString());
+		gr.removeStudentFromGroup(st2);
+		System.out.println(gr.toString());
+	} catch (ExceptionGroupSize e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+		gr.sortBySecondName();	
+		System.out.println(gr.toString());
+
+	}
+
+}

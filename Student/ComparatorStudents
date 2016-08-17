@@ -1,0 +1,71 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Comparator;
+import java.util.Date;
+
+public class ComparatorStudents implements Comparator<Student> {
+private enum sortType {
+	ByName, ByAge, BySecondName,  byUniversity,ByScore, bySex, byMinFieldOfStudy
+}
+	sortType paramName;
+	@Override
+	public int compare(Student student1, Student student2) {
+		if (student1==null&&student2==null){
+			return 0; 
+		}
+		else if (student1==null&&student2!=null){
+			return -1; 
+		}
+		else if (student2==null&&student1!=null){
+			return -1; 
+		}
+		
+		
+			switch (paramName){
+			
+			case BySecondName:
+			
+			String st1Name = student1.getSecondName();
+			String st2Name = student2.getSecondName();
+			return st1Name.compareToIgnoreCase(st2Name);	
+		
+			case ByName:
+								
+				String st1FName = student1.getFirstName();
+				String st2FName = student2.getFirstName();
+				return st1FName.compareToIgnoreCase(st2FName);	
+			
+			case ByAge:	
+				SimpleDateFormat sdf = new SimpleDateFormat ("dd::MM:yyyy");
+				try {
+					Date d2 = sdf.parse(student2.getStringDateOfBirth());
+					Date d1 = sdf.parse(student1.getStringDateOfBirth());
+					Calendar cal = Calendar.getInstance();
+					cal.setTime(d1);
+					long d1mills= cal.getTimeInMillis();
+					cal.setTime(d2);
+					long d2mills =cal.getTimeInMillis();
+					return d1mills>d2mills?1:-1;
+					
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				return 0;
+				
+			case byUniversity:
+				
+			String st1University = student1.getUniversity();
+			String st2University = student2.getUniversity();
+			return st1University.compareToIgnoreCase(st2University);
+		}
+			return 0 ;			
+			
+
+		// TODO Auto-generated method stub
+		
+	}
+
+}

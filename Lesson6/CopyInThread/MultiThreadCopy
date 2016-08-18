@@ -1,57 +1,39 @@
-import java.io.File;
-
-public class MultiThreadCopy {
+public class MultiThreadCalcSumOfArray {
 	
-	private int numberOfThreads; 
-	  
-	public MultiThreadCopy(int numberOfThreads) {
-		super();
-		this.numberOfThreads = numberOfThreads;
-	}
-	public MultiThreadCopy() {
-		super();
-		
-	}
-	
-	
-
-	public int getNumberOfThreads() {
-		return numberOfThreads;
-	}
-
-
-	public void setNumberOfThreads(int numberOfThreads) {
-		this.numberOfThreads = numberOfThreads;
-	}
-
-
-	public void concurrentCopy(int numberOfThreads, File source, File destination ){
-		ThreadCopy tc = new ThreadCopy(source,destination);
-		File listFiles [] = tc.getListFiles();
-//-------------------------------------------------------------		
-		
-		for(int i = 0; i<listFiles.length;i++ ){
-			System.out.println(listFiles[i].toString());
-			
+	public static int  sumInThreads(int array[], int numberOfThreads){
+		if (array.length == 0 || numberOfThreads == 0)
+		{
+			return 0;
 		}
-//-------------------------------------------------------------				
-	
-		ThreadCopy [] threadArray = new ThreadCopy[numberOfThreads];	
-		int size = listFiles.length/numberOfThreads;
 		
+		SingleThreadCalcSumOfArray [] threadArray = new SingleThreadCalcSumOfArray[numberOfThreads];
+				
+		int size = array.length/numberOfThreads;
 		
-		for (int i = 0; i< numberOfThreads-1; i++){
-			int begin = size*i; 
-			int count = size; 
-			threadArray[i]= new ThreadCopy(destination, listFiles, begin,count );
+		for(int i = 0; i < numberOfThreads - 1; i++){
+			int begin = size * i; 
+			int count  = size;
+			threadArray[i] = new SingleThreadCalcSumOfArray(array, begin, count);
 			threadArray[i].start();
 		}
 		
-		int begin = (numberOfThreads - 1)*size ;
-		int count = listFiles.length - begin;		
-		threadArray[numberOfThreads - 1] = new ThreadCopy(destination, listFiles, begin,count);
+		int begin = (numberOfThreads - 1) * size;
+		int count = array.length - begin;		
+		threadArray[numberOfThreads - 1] = new SingleThreadCalcSumOfArray(array, begin, count);
 		threadArray[numberOfThreads - 1].start();
 		
-		
+		int sum = 0;
+		for(int i = 0 ; i < numberOfThreads; i++){
+			try {
+				threadArray[i].join();
+				sum += threadArray[i].getResult();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		System.out.println(sum);
+		return 0;
 	}
+
+
 }

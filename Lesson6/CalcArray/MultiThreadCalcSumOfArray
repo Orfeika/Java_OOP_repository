@@ -1,0 +1,19 @@
+
+public class MultiThreadCalcSumOfArray {
+	
+	public static void sumInThreads(int array[], int numberOfThreads){
+		
+		SingleThreadCalcSumOfArray [] threadArray = new SingleThreadCalcSumOfArray[8];
+		
+		for(int  i = 0; i<threadArray.length; i++){
+		int size = array.length/numberOfThreads;
+		int begin = size*i; 
+		int end  = ((i+1)*size);
+		}
+		
+		calculateSumInThread
+		
+	}
+
+
+}

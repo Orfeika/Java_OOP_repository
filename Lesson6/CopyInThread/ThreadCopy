@@ -7,98 +7,53 @@ import java.io.IOException;
 import javax.management.ListenerNotFoundException;
 
 public class ThreadCopy extends Thread {
-	private File source;
-	private File destination;
 	private File listFiles[];
-	private int indexStart;
-	private int count;
+	private String destination;
+	private boolean success;
 
-	public ThreadCopy(File destination, int indexStart, int count) {
-		super();
-		this.destination = destination;
-		this.listFiles = destination.listFiles();
-		this.indexStart = indexStart;
-		this.count = count;
+	public boolean isSuccess() {
+		return success;
 	}
 
-	public ThreadCopy(File destination, File[] listFiles, int indexStart, int count) {
+	public ThreadCopy(File[] listFiles, String destination) {
 		super();
 		this.destination = destination;
 		this.listFiles = listFiles;
-		this.indexStart = indexStart;
-		this.count = count;
+		this.success = false;
 	}
 
-	public ThreadCopy(File source, File destination) {
-		super();
-		this.source = source;
-		this.destination = destination;
-		this.listFiles = source.listFiles();
-	}
-
-	public ThreadCopy() {
-		super();
-	}
-
-	public File[] getListFiles() {
-		return listFiles;
-	}
-
-	public File getSource() {
-		return source;
-	}
-
-	public void setSource(File source) {
-		this.source = source;
-	}
-
-	public File getDestination() {
-		return destination;
-	}
-
-	public void setDestination(File destination) {
-		this.destination = destination;
-	}
-
-	public void copyFiles(File listFiles[], int indexStart, int count, File destination) throws IOException {
-
+	public boolean copyFiles(File listFiles[], String destination) throws IOException {
 		FileInputStream is = null;
 		FileOutputStream os = null;
-		for (int i = 0; i < count; i++) {
+		for (int i = 0; i < listFiles.length; i++) {
 			try {
-				is = new FileInputStream(listFiles[i + indexStart]);
-				os = new FileOutputStream(destination);
+				String destFileName = destination + "\\" + listFiles[i].getName();
+				is = new FileInputStream(listFiles[i]);
+				
+				File destFile = new File(destFileName);
+				destFile.createNewFile();				
+				os = new FileOutputStream(destFile);
+				
 				byte[] buffer = new byte[1024];
 				int lenght;
 				while ((lenght = is.read(buffer)) > 0) {
 					os.write(buffer, 0, lenght);
-
 				}
 			} finally {
 				is.close();
 				os.close();
 			}
-
 		}
-
+		return true;
 	}
 
 	@Override
 	public void run() {
 		try {
-			copyFiles(listFiles, indexStart, count, destination);
+			success = copyFiles(listFiles, destination);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			success = false;
 			e.printStackTrace();
 		}
-
-		super.run();
 	}
-
-	@Override
-	public synchronized void start() {
-		// TODO Auto-generated method stub
-		super.start();
-	}
-
 }

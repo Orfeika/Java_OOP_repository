@@ -1,18 +1,39 @@
 
 public class MultiThreadCalcSumOfArray {
 	
-	public static void sumInThreads(int array[], int numberOfThreads){
-		
-		SingleThreadCalcSumOfArray [] threadArray = new SingleThreadCalcSumOfArray[8];
-		
-		for(int  i = 0; i<threadArray.length; i++){
-		int size = array.length/numberOfThreads;
-		int begin = size*i; 
-		int end  = ((i+1)*size);
+	public static int  sumInThreads(int array[], int numberOfThreads){
+		if (array.length == 0 || numberOfThreads == 0)
+		{
+			return 0;
 		}
 		
-		calculateSumInThread
+		SingleThreadCalcSumOfArray [] threadArray = new SingleThreadCalcSumOfArray[numberOfThreads];
+				
+		int size = array.length/numberOfThreads;
 		
+		for(int i = 0; i < numberOfThreads - 1; i++){
+			int begin = size * i; 
+			int count  = size;
+			threadArray[i] = new SingleThreadCalcSumOfArray(array, begin, count);
+			threadArray[i].start();
+		}
+		
+		int begin = (numberOfThreads - 1) * size;
+		int count = array.length - begin;		
+		threadArray[numberOfThreads - 1] = new SingleThreadCalcSumOfArray(array, begin, count);
+		threadArray[numberOfThreads - 1].start();
+		
+		int sum = 0;
+		for(int i = 0 ; i < numberOfThreads; i++){
+			try {
+				threadArray[i].join();
+				sum += threadArray[i].getResult();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		System.out.println(sum);
+		return 0;
 	}
 
 

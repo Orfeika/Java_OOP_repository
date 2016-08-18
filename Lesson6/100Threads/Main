@@ -1,0 +1,18 @@
+
+
+
+public class Main {
+
+
+	public static void main(String[] args) {
+		for (int i = 1; i<=50; i++) {
+			MyRunnable r = new MyRunnable(i);
+			Thread tr = new Thread(r);
+			tr.setName("Thread " + Integer.toString(i));
+			tr.start();
+		}
+
+		
+	}
+
+}

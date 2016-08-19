@@ -1,4 +1,5 @@
 import java.io.File;
+import java.util.Arrays;
 
 public class FileListener implements Runnable {
 	private String directory;
@@ -9,52 +10,26 @@ public class FileListener implements Runnable {
 		this.directory = directory;
 	}
 
+
+	
 	public void compareArrays(File[] listFilesBefore, File[] listFilesAfter) {
-		StringBuilder incDifference = new StringBuilder();
-		StringBuilder decDifference = new StringBuilder();
-
-		for (int i = 0; i < listFilesBefore.length; i++) {
-			File file = listFilesBefore[i];
-			for (int j = 0; j < listFilesAfter.length; j++) {
-				if (file.equals(listFilesAfter[j])) {
-					break;
-				}
-				else {
-					decDifference.append(listFilesAfter[j].getAbsolutePath());
-					decDifference.append(System.lineSeparator());
-				}
-				
-			}
-			
+		 for (int i = 0; i < listFilesBefore.length; i++) {
+		  File file = listFilesBefore[i];
+		  if (!Arrays.asList(listFilesAfter).contains(file))
+		  {
+		   System.out.println(file.getName() + " was deleted");
+		  } 
+		 }  
+		 
+		 for (int i = 0; i < listFilesAfter.length; i++) {
+		  File file = listFilesAfter[i];
+		  if (!Arrays.asList(listFilesBefore).contains(file))
+		  {
+		   System.out.println(file.getName() + "was added");
+		  }
+		 }
 		}
-		System.out.println("dec"+decDifference.toString()+ "dec");
-		
-		
-		for (int i = 0; i < listFilesAfter.length; i++) {
-			File file = listFilesAfter[i];
-			for (int j = 0; j < listFilesBefore.length; j++) {
-				if (file.equals(listFilesBefore[j])) {
-					return;
-				}
-				incDifference.append(listFilesAfter[j].getAbsolutePath());
-				incDifference.append(System.lineSeparator());
-
-			}
-		}
-
-		if (incDifference.capacity() == 0 && decDifference.capacity() == 0) {
-			System.out.println("nothing");
-
-		} else if (!(incDifference.capacity() == 0) && decDifference.capacity() == 0) {
-			System.out.println("Files were added to folder: " + incDifference.toString());
-		} else if (!(decDifference.capacity() == 0) && incDifference.capacity() == 0) {
-			System.out.println("Files were removed from folder: \n" + decDifference.toString());
-		}
-			else if (!(incDifference.capacity() == 0)&& !(decDifference.capacity() == 0)){
-		System.out.println("Files were removed from folder: " + decDifference.toString() + "\n"
-				+ "Files were added to folder: " + incDifference.toString());
-		}
-	}
+	
 
 	@Override
 	public void run() {
@@ -68,9 +43,11 @@ public class FileListener implements Runnable {
 			}
 			newState = new File(directory).listFiles();
 			compareArrays(oldState, newState);
-
+			
+			oldState= newState;
 		}
 
 	}
 
 }
+

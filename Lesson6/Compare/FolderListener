@@ -11,13 +11,15 @@ public class FolderListener {
 
 	public void ListenFolder(){
 		CheckState  cs = new CheckState(directory);
-		File [] currentArray = cs.getListFile();
+		File [] currentArray = cs.getListFilesBefore();
 		
 		cs.start();
 		while (true){
 			try {
 				cs.sleep(1000);
-
+				File [] newArray = cs.getListFilesAfter();
+				cs = new CheckState(directory, currentArray, newArray);
+				currentArray = newArray;
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

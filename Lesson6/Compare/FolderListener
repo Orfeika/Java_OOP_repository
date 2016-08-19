@@ -1,0 +1,32 @@
+import java.io.File;
+
+public class FolderListener {
+	private String directory; 
+	
+	
+	
+	public FolderListener(String directory) {
+			this.directory = directory;
+	}
+
+	public void ListenFolder(){
+		CheckState  cs = new CheckState(directory);
+		File [] currentArray = cs.getListFile();
+		
+		cs.start();
+		while (true){
+			try {
+				cs.sleep(1000);
+
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+	}
+	
+
+
+}

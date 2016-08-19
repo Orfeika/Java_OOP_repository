@@ -1,29 +1,30 @@
-import java.awt.List;
+
 import java.io.File;
 
 public class CheckState extends Thread {
 
-	private File ListFile[];
+	private File[] listFilesBefore;
+	private File[] listFilesAfter;
 	private String directory;
 
 	public CheckState(String directory) {
 		this.directory = directory;
-		this.ListFile = new File(directory).listFiles();
 	}
 
-	public File[] getListFile() {
-		return ListFile;
+	public CheckState(String directory, File[] listFilesBefore, File[] listFilesAfter) {
+		this.directory = directory;
+		this.listFilesBefore = listFilesBefore;
+		this.listFilesAfter = listFilesAfter;
 	}
 
-	public File[] savedArrayOfFiles(String directory) {
-		if (directory.isEmpty()) {
-			System.out.println("Wrong directory");
-			return null;
+	public File[] getListFilesBefore() {
+		listFilesBefore = new File(directory).listFiles();
+		return listFilesBefore;
+	}
 
-		}
-		File[] array = getListFile();
-		return array;
-
+	public File[] getListFilesAfter() {
+		listFilesAfter = new File(directory).listFiles();
+		return listFilesAfter;
 	}
 
 	public String compareArrays(File[] listFilesBefore, File[] listFilesAfter) {
@@ -70,7 +71,8 @@ public class CheckState extends Thread {
 
 	@Override
 	public void run() {
-		compareArrays(File[] listFilesBefore, File[] listFilesAfter);
+		
+		compareArrays(File [] listFilesBefore, File [] listFilesAfter);
 	}
 
 }

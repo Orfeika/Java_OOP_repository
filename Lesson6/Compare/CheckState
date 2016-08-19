@@ -1,0 +1,76 @@
+import java.awt.List;
+import java.io.File;
+
+public class CheckState extends Thread {
+
+	private File ListFile[];
+	private String directory;
+
+	public CheckState(String directory) {
+		this.directory = directory;
+		this.ListFile = new File(directory).listFiles();
+	}
+
+	public File[] getListFile() {
+		return ListFile;
+	}
+
+	public File[] savedArrayOfFiles(String directory) {
+		if (directory.isEmpty()) {
+			System.out.println("Wrong directory");
+			return null;
+
+		}
+		File[] array = getListFile();
+		return array;
+
+	}
+
+	public String compareArrays(File[] listFilesBefore, File[] listFilesAfter) {
+		StringBuilder incDifference = new StringBuilder();
+		StringBuilder decDifference = new StringBuilder();
+
+		for (int i = 0; i < listFilesBefore.length; i++) {
+			File file = listFilesBefore[i];
+			for (int j = 0; j < listFilesAfter.length; j++) {
+				if (file.equals(listFilesAfter[j])) {
+					break;
+				}
+				decDifference.append(listFilesAfter[j].getAbsolutePath());
+				decDifference.append(System.lineSeparator());
+			}
+
+		}
+
+		for (int i = 0; i < listFilesAfter.length; i++) {
+			File file = listFilesAfter[i];
+			for (int j = 0; j < listFilesBefore.length; j++) {
+				if (file.equals(listFilesBefore[j])) {
+					break;
+				}
+				incDifference.append(listFilesAfter[j].getAbsolutePath());
+				incDifference.append(System.lineSeparator());
+
+			}
+		}
+
+		if (incDifference.capacity() == 0 && decDifference.capacity() == 0) {
+			return "";
+		}
+		if (!(incDifference.capacity() == 0) && decDifference.capacity() == 0) {
+			return "Files were added to folder: " + incDifference.toString();
+		}
+		if (!(decDifference.capacity() == 0) && incDifference.capacity() == 0) {
+			return "Files were removed from folder: " + decDifference.toString();
+		}
+		return "Files were removed from folder: " + decDifference.toString() + "\n" + "Files were added to folder: "
+				+ incDifference.toString();
+
+	}
+
+	@Override
+	public void run() {
+		compareArrays(File[] listFilesBefore, File[] listFilesAfter);
+	}
+
+}

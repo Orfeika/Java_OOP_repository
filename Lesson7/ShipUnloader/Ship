@@ -1,0 +1,18 @@
+public class Ship {
+private int	numberOfBoxes;
+
+public Ship(int numberOfBoxes) {
+	this.numberOfBoxes = numberOfBoxes;
+}
+
+public int getNumberOfBoxes() {
+	return numberOfBoxes;
+}
+
+public void setNumberOfBoxes(int numberOfBoxes) {
+	this.numberOfBoxes = numberOfBoxes;
+}
+
+
+
+}

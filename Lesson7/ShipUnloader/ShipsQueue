@@ -1,0 +1,33 @@
+import java.util.Stack;
+
+public class ShipsQueue {
+	
+	Stack <Ship> shipsQueue = new <Ship> Stack();
+	
+	public void addShip(Ship ship){
+		if (ship == null  ){
+			System.out.println("Null ship");
+			
+		}
+		shipsQueue.addElement(ship);
+	}
+	
+	public synchronized Ship getShip(){
+		if(!shipsQueue.empty()){
+			return shipsQueue.pop();	
+		}
+		System.out.println("Ships queue is empty");
+		return null;
+		
+	}
+	
+	public boolean isNotEmpty(){
+		if(!shipsQueue.empty()){
+			return true; 	
+		}
+		
+		return false;
+	}
+	
+
+}

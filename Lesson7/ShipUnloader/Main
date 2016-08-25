@@ -1,0 +1,25 @@
+
+public class Main {
+
+	public static void main(String[] args) {
+		Ship ship1 = new Ship(10);
+		Ship ship2 = new Ship(10);
+		Ship ship3 = new Ship(10);
+		Ship ship4 = new Ship(10);
+		ShipsQueue ships = new ShipsQueue();
+		ships.addShip(ship1);
+		ships.addShip(ship2);
+		ships.addShip(ship3);
+		ships.addShip(ship4);
+		
+		Dock dc = new Dock(ships);
+		
+		Thread tr1 = new Thread(dc);
+		Thread tr2 = new Thread(dc);
+		tr1.start();
+		tr2.start();
+		// TODO Auto-generated method stub
+
+	}
+
+}

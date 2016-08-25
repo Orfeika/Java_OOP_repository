@@ -1,0 +1,41 @@
+
+public class Dock implements Runnable{
+	private ShipsQueue ships; 
+	
+
+	public Dock(ShipsQueue ships) {
+			this.ships = ships;
+	}
+	private  Ship getShip(ShipsQueue ships){
+		return ships.getShip();
+		
+	}
+	public boolean  unloadTheShip(){
+		Ship ship =  getShip(ships);
+		int n = ship.getNumberOfBoxes();
+		for(int i = 0 ; i<n;){
+			try {
+				i++;
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		System.out.println("Ship is unloaded ");
+		return true; 
+	}
+	
+	
+
+	@Override
+	public void run() {
+		while(ships.isNotEmpty()==true){
+			unloadTheShip();
+		}
+		
+
+		
+	} 
+	

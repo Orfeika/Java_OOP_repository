@@ -1,0 +1,46 @@
+import java.util.Queue;
+
+public class DrinkCola {
+	private Queue<String> people;
+	private int numberOfCups;
+
+	public Queue<String> getPeople() {
+		return people;
+	}
+
+	public void setPeople(Queue<String> people) {
+		this.people = people;
+	}
+
+	public int getNumberOfCups() {
+		return numberOfCups;
+	}
+
+	public void setNumberOfCups(int numberOfCups) {
+		this.numberOfCups = numberOfCups;
+	}
+
+	public void addPeopleToList(String name) {
+		if (name == null) {
+			return;
+		}
+		people.add(name);
+
+	}
+
+	public void drinkCola(Queue<String> people, int numberOfCups) {
+		if (people.isEmpty() == false) {
+			for (int i = 0; i < numberOfCups; i++) {
+				String temp = people.poll();
+				people.offer(temp);
+				people.offer(temp);
+
+			}
+
+			System.out.println(people.toString());
+
+		}
+
+	}
+
+}

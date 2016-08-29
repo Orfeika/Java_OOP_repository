@@ -1,0 +1,21 @@
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class Main {
+	
+	public static void main(String [] args){
+		Queue <String> people =new LinkedList <>();
+		
+		people.add("Sheldon");
+		people.add("Volovitc");
+		people.add("Kutrapalli");
+		people.add("Penny");
+		people.add("Leonard");
+		System.out.println(people.toString());
+		
+		DrinkCola dc = new DrinkCola();
+		dc.drinkCola(people, 3);
+		
+	}
+
+}

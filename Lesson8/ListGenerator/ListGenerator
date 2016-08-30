@@ -1,0 +1,40 @@
+import java.util.LinkedList;
+import java.util.Random;
+
+public class ListGenerator  <E extends Number> {
+private E value; 	
+	
+	
+	public ListGenerator(E value) {
+	this.value = value;
+	}
+
+	private LinkedList <E> list;
+	private int number;
+	
+	
+	public void generateElements (LinkedList <E> list, int number){
+	
+		Random  rm = new Random();
+		
+		for (int i = 0 ; i<number; i++){
+			
+			list.add();
+		}
+	}
+	
+	public void removeElements(LinkedList <E> list){
+		list.removeLast();
+		list.removeLast();
+		list.removeFirst();
+	}
+	
+	public void print(){
+		LinkedList <E> list = new LinkedList <E> ();
+		generateElements(list, 10);
+		removeElements(list);
+		System.out.println(list.toString());
+		
+	}
+
+}
